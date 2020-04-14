@@ -61,9 +61,10 @@ pinMode(5, OUTPUT);
     while (1);
   }
   
- 
-char GUID[SUPLA_GUID_SIZE] = {0x59,0xA7,0x87,0xC4,0x21,0x41,0x50,0x15,0x05,0xC4,0x17,0x15,0xB9,0x2F,0xD2,0x83};  // ﻿with GUID that you can retrieve from https://www.supla.org/arduino/get-guid
-uint8_t mac[6] = {0x84, 0xF3, 0xEB, 0x93,0x39, 0xC4};
+
+#include "suplaconfig.h" 
+//char GUID[SUPLA_GUID_SIZE] = {0x59,0xA7,0x87,0xC4,0x21,0x41,0x50,0x15,0x05,0xC4,0x17,0x15,0xB9,0x2F,0xD2,0x83};  // ﻿with GUID that you can retrieve from https://www.supla.org/arduino/get-guid
+//uint8_t mac[6] = {0x84, 0xF3, 0xEB, 0x93,0x39, 0xC4};
 
 //  SuplaDevice.addRelay(12, false);                 
 //  SuplaDevice.addRelay(13, false);              
@@ -80,9 +81,9 @@ uint8_t mac[6] = {0x84, 0xF3, 0xEB, 0x93,0x39, 0xC4};
 
   SuplaDevice.begin(GUID,          // Global Unique Identifier 
                     mac,           // Ethernet MAC address
-                    "svr9.supla.org",     // SUPLA server address
-                    2909,                 // Location ID 
-                    "03e1");              // Location Password
+                    serverStr,     // SUPLA server address
+                    locationId,                 // Location ID 
+                    locationPass);              // Location Password
     
 }
 
