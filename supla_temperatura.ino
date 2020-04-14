@@ -6,14 +6,19 @@
 #define SUPLADEVICE_CPP
 #include <SuplaDevice.h>
 #include <Adafruit_Sensor.h>
-#include <Adafruit_BMP280.h>
+#include <Adafruit_BME280.h>
+
 
 WiFiClient client;
 
-const char* ssid     = "KWNT";    // WiFi SSID
-const char* password = "R3dyck430/8";  // Wifi Password
 
-Adafruit_BMP280 bme;
+#include "myconfig.h"
+//#else
+//const char* ssid     = "ssid";    // WiFi SSID
+//const char* password = "password";  // Wifi Password
+//#endif
+
+Adafruit_BME280 bme;
 
 int ledPower = 5;
 int ELEVATION = 135;
@@ -31,18 +36,18 @@ void get_temperature_and_humidity(int channelNumber, double *temp, double *humid
     Serial.print(bme.readTemperature());
     Serial.println(" *C");
     
- //   *humidity = bme.readHumidity();
-   // Serial.print("Humidity = ");
-//    Serial.print(bme.readHumidity());
- //   Serial.println(" %");
- //   if ( isnan(*temp) || isnan(*humidity) ) {
+    *humidity = bme.readHumidity();
+    Serial.print("Humidity = ");
+    Serial.print(bme.readHumidity());
+    Serial.println(" %");
+    if ( isnan(*temp) || isnan(*humidity) ) {
       *temp = -275;
-    //  *humidity = -1;
+      *humidity = -1;
     }
 //    delayMicroseconds(deltaTime);
  //   delayMicroseconds(sleepTime);    
       
-//}
+}
 
 
 void setup() {
@@ -75,9 +80,9 @@ uint8_t mac[6] = {0x84, 0xF3, 0xEB, 0x93,0x39, 0xC4};
 
   SuplaDevice.begin(GUID,          // Global Unique Identifier 
                     mac,           // Ethernet MAC address
-                    "svr17.supla.org",     // SUPLA server address
-                    1653,                 // Location ID 
-                    "e44f");              // Location Password
+                    "svr9.supla.org",     // SUPLA server address
+                    2909,                 // Location ID 
+                    "03e1");              // Location Password
     
 }
 
